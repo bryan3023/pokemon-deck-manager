@@ -12,7 +12,7 @@ DROP USER IF EXISTS 'bryan3023.pokemon_deck'@'localhost';
 
 CREATE
   USER 'bryan3023.pokemon_deck'@'localhost'
-  IDENTIFIED BY 'ifM91qUy89*#%R^QsFjN'
+  IDENTIFIED BY 'Ce*D^SK1u2j3^x*hvusU'
 ;
 
 GRANT
