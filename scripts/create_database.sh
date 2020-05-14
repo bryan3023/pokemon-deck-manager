@@ -8,7 +8,7 @@ db_name=$1
 
 function run_myssql_script() {
     if [ -f $1 ]; then
-        if [[ -n "$3" ]] ; then
+        if [ -n "$3" ] ; then
             /usr/local/mysql/bin/mysql -u root --password=$2 --database=$3 < $1 > /dev/null
         else
             /usr/local/mysql/bin/mysql -u root --password=$2 < $1 > /dev/null
