@@ -1,7 +1,7 @@
 --
---  Create Eat-Da-Burger localhost account
+--  Create Pokemon Deck Manager local artifacts
 --
---  Create an account for working with the database locally.
+--  Create a database and account for working with the database locally.
 --
 
 
