@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "create-db-mac": "chmod +x ./scripts/create_database.sh ; ./scripts/create_database.sh pokemon_deck_DB",
-    "remove-db-mac": "chmod +x ./scripts/remove_database.sh ; ./scripts/remove_database.sh"
+    "remove-db-mac": "chmod +x ./scripts/remove_database.sh ; ./scripts/remove_database.sh",
+    "create-db-win": ".\\scripts\\invoke_script.cmd .\\scripts\\Create-Database.ps1 pokemon_deck_DB",
+    "remove-db-win": ".\\scripts\\invoke_script.cmd .\\scripts\\Remove-Database.ps1"
   },
   "keywords": [],
   "author": "",
