@@ -1,1 +1,1 @@
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "%1" %2
