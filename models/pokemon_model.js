@@ -48,7 +48,7 @@ class PokemonModel {
           specialDefense: this.getStat(pokemon, 'special-defense'),
           attack: this.getStat(pokemon, 'attack'),
           specialAttack: this.getStat(pokemon, 'special-attack'),
-          base_happiness: this.getStat(pokemon, 'hp'),
+          hp: this.getStat(pokemon, 'hp'),
           types: pokemonTypes
         }
 
