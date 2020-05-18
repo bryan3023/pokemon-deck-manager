@@ -1,0 +1,21 @@
+<ul>
+  {{#each pokemon}}
+  	<li>
+		<a class="list-group-item list-group-item-action active" id="list-"+{{pokemonkey}}+"-list" data-toggle="list" href="#list-"+{{pokemonkey}}+"" role="tab" aria-controls=""+{{pokemonkey}}+"">Name: {{pokemonkey}}</a>
+  	</li>
+  {{/each}}
+</ul>
+
+<div class="row">
+  <div class="col-4">
+    <div class="list-group" id="list-tab" role="tablist">
+		<a class="list-group-item list-group-item-action active" id="list-"+{{pokemonkey}}+"-list" data-toggle="list" href="#list-"+{{pokemonkey}}+"" role="tab" aria-controls="{{pokemonkey}}">Name: {{pokemonkey}}</a>
+    </div>
+  </div>
+  <div class="col-8">
+    <div class="tab-content" id="nav-tabContent">
+		{{!-- PUT IN DETAILED POKEMON INFO --}}
+      <div class="tab-pane fade" id="list-"+{{pokemonkey}} role="tabpanel" aria-labelledby="list-"+{{pokemonkey}}+"-list">...</div>
+    </div>
+  </div>
+</div>
