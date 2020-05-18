@@ -1,4 +1,4 @@
-# GROUP NARR Project_01
+# POKEMON DECK MANAGER
 
 <!-- playing around for badges -->
 
@@ -6,6 +6,7 @@
 
 ## Description
 
+* In Pokemon, the pokedex is an electronic encyclopedia with every pokemon and their average stats and abilities. Pokemon battles are fought by trainers using teams with a maximum size of 6 pokemon. Our app lets the user search for pokemon, read their stats, and add them to a custom team.
 
 
 ## User Story
@@ -48,14 +49,6 @@ https://pokemontcg.io/
     * [LayItOut](https://grid.layoutit.com/)
 
 
-### FAQ LINKS
-
-* [DC General](https://coronavirus.dc.gov/page/covid-19-faqs)
-* [DC Unemployment](https://does.dc.gov/page/unemployment-compensation)
-* [MD General](https://coronavirus.maryland.gov/#FAQ)
-* [MD Unemployment](https://www.dllr.state.md.us/employment/uicovidfaqs.shtml)
-* [VA General](http://www.vdh.virginia.gov/coronavirus/frequently-asked-questions/)
-* [VA Unemployment](https://www.vec.virginia.gov/faqs/general-unemployment-insurance-questions)
 
 
 ### Inspiration
@@ -70,27 +63,6 @@ https://pokemontcg.io/
 
 
 
-## Pseudo Code
-
-1. Creating initial webpage with DMV covid resources
-   - with nav bar
-2. website design with bootstrap/css
-    - design how input all three states on main page
-    - use 3 cards from bootstrap
-3. pulling info from covid API
-     - Can grab most recent covid values by state
-    - "https://covidtracking.com/api/states?state=DC"
-    - "https://covidtracking.com/api/states?state=MD"
-    - "https://covidtracking.com/api/states?state=VA"
-4. push info in cards
-    - decide what info to include
-5. pulling info from covid API - current uptodate 
-6. display info on main page
-7. comic relief page with more covid resources/survival 
-    1. include cat api
-    2. faq links
-    3. support links
-    4. fun game
 
 ## License
 
