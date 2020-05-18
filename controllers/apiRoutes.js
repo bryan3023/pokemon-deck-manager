@@ -24,6 +24,12 @@ module.exports = function(app) {
       .catch((error) => console.error(error))
   })
 
+  app.get("/api/deck", function(req, res) {
+    Pokemon.getAllDecks()
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
+
   app.get("/api/deck/:deckId", function(req, res) {
     const deckId = req.params.deckId
 

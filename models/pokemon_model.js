@@ -76,35 +76,38 @@ class PokemonModel {
 
 //        console.log(await this.pokeAPI.getMovesList(pokemonMoves))
 
-        return {
-          name: pokemonName,
-          number: pokemon.id,
-          height: pokemon.height,
-          weight: pokemon.weight,
-          sprite: pokemon.sprites.front_default,
-          baseHappiness: pokemon.base_happiness,
-          abilities: pokemonAbilities,
-          moves: pokemonMoves,
-          description: flavorText,
-          speed: this.getStat(pokemon, 'speed'),
-          defense: this.getStat(pokemon, 'defense'),
-          specialDefense: this.getStat(pokemon, 'special-defense'),
-          attack: this.getStat(pokemon, 'attack'),
-          specialAttack: this.getStat(pokemon, 'special-attack'),
-          hp: this.getStat(pokemon, 'hp'),
-          types: pokemonTypes
-        }
-
+      return {
+        name: pokemonName,
+        number: pokemon.id,
+        height: pokemon.height,
+        weight: pokemon.weight,
+        sprite: pokemon.sprites.front_default,
+        baseHappiness: pokemon.base_happiness,
+        abilities: pokemonAbilities,
+        moves: pokemonMoves,
+        description: flavorText,
+        speed: this.getStat(pokemon, 'speed'),
+        defense: this.getStat(pokemon, 'defense'),
+        specialDefense: this.getStat(pokemon, 'special-defense'),
+        attack: this.getStat(pokemon, 'attack'),
+        specialAttack: this.getStat(pokemon, 'special-attack'),
+        hp: this.getStat(pokemon, 'hp'),
+        types: pokemonTypes
+      }
     }
     catch (e) {
       console.error(e)
     }
   }
 
+  async getAllDecks() {
+    return await database.query('SELECT * FROM deck')
+  }
+
   async getDeck(deckId) {
     const
       deck = await database.query("SELECT id,name from deck WHERE id = ?", deckId),
-      deckMemmbers = await database.query(`
+      deckMembers = await database.query(`
         SELECT
           p.id,
           p.pokemon_key,
@@ -122,7 +125,7 @@ class PokemonModel {
     return {
       deckId: deck[0].id,
       deckName: deck[0].name,
-      deckMembers: deckMemmbers
+      deckMembers: deckMembers
     }
   }
 
