@@ -14,6 +14,7 @@ CREATE TABLE pokemon (
   pokemon_key VARCHAR(60) NOT NULL,
   pokemon_name VARCHAR(120) NOT NULL,
   pokemon_num INTEGER NOT NULL,
+  pokemon_sprite VARCHAR(255) NOT NULL,
 
   PRIMARY KEY (id)
 );
