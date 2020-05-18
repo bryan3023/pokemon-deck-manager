@@ -3,12 +3,12 @@
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 1px 1px;
-    grid-template-areas: "Welcome Welcome Welcome Welcome" "Search-Area PokemonDisplay Saved-Decks Saved-Decks" "Search-Area PokemonDisplay Saved-Decks Saved-Decks";
+    grid-template-areas: "Welcome Welcome Welcome Welcome" "List-Area PokemonDisplay Saved-Decks Saved-Decks" "List-Area PokemonDisplay Saved-Decks Saved-Decks";
   }
   
   .Welcome { grid-area: Welcome; }
   
-  .Search-Area { grid-area: Search-Area; }
+  .List-Area { grid-area: List-Area; }
   
   .Saved-Decks { grid-area: Saved-Decks; }
   
