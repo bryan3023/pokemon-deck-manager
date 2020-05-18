@@ -11,6 +11,7 @@ class PokemonModel {
     this.loadPokedex()
   }
 
+
   async loadPokedex() {
     const pokedex = await database.query('SELECT * FROM pokemon')
 
@@ -20,7 +21,8 @@ class PokemonModel {
       for (let pokemon_key of kanto) {
 
         const pokemon = await this.getByKey(pokemon_key)
-        console.log(pokemon)
+        await this.sleep(2000)
+        console.log(`Adding ${pokemon.name} (${pokemon.number} of ${KANTO_NUM_POKEMON}) to the database`)
         await database.query(`INSERT INTO pokemon SET ?`, {
           pokemon_key: pokemon_key,
           pokemon_name: pokemon.name,
@@ -29,6 +31,7 @@ class PokemonModel {
       }
     }
   }
+
 
   async search(searchTerm) {
     const santizedSearch = searchTerm.trim()
@@ -45,18 +48,12 @@ class PokemonModel {
     return await database.query(queryString, queryMatch)
   }
 
-  async getPokemonCardByName(name) {
-      return await PokemonTCG.card.where({
-        setCode: 'base1',
-        supertype: 'pokemon',
-        name: name
-      })
-  }
 
   async getAll() {
     const names = await database.query('SELECT pokemon_name FROM pokemon')
     return names.map(n => n.pokemon_name)
   }
+
 
   async getByKey(name) {
     try {
@@ -85,7 +82,7 @@ class PokemonModel {
           baseHappiness: pokemon.base_happiness,
           abilities: pokemonAbilities,
           moves: pokemonMoves,
-          flavorText: flavorText,
+          description: flavorText,
           speed: this.getStat(pokemon, 'speed'),
           defense: this.getStat(pokemon, 'defense'),
           specialDefense: this.getStat(pokemon, 'special-defense'),
@@ -101,6 +98,7 @@ class PokemonModel {
     }
   }
 
+
   async getPokedex() {
     const
       pokedex = await this.pokeAPI.getPokedexByName('kanto'),
@@ -109,9 +107,18 @@ class PokemonModel {
     return pokemonName;
   }
 
+
   getStat(pokemon, statName) {
     const stat = pokemon.stats.filter(p => p.stat.name == statName)[0]
     return  stat.base_stat
+  }
+
+
+  /*
+    Add delay to throttle calls when creating the database.
+   */
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
 }
