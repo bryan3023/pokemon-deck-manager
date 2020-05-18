@@ -24,4 +24,30 @@ module.exports = function(app) {
       .catch((error) => console.error(error))
   })
 
+  app.get("/api/deck/:deckId", function(req, res) {
+    const deckId = req.params.deckId
+
+    Pokemon.getDeck(deckId)
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
+
+
+  app.post("/api/deck", function(req, res) {
+    const deckName = req.body.name
+
+    Pokemon.addDeck(deckName)
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
+
+  app.post("/api/deck/:deckId/:pokemonNumber", function(req, res) {
+    const
+      deckId = req.params.deckId,
+      pokemonNumber = req.params.pokemonNumber
+
+    Pokemon.addToDeck(deckId, pokemonNumber)
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
 }

@@ -2,7 +2,9 @@ const
   PokeAPI = require('pokedex-promise-v2'),
   database = require('../config/database')
 
-const KANTO_NUM_POKEMON = 151
+const
+  KANTO_NUM_POKEMON = 151,
+  DECK_SIZE_LIMIT = 6
 
 class PokemonModel {
 
@@ -23,10 +25,11 @@ class PokemonModel {
         const pokemon = await this.getByKey(pokemon_key)
         await this.sleep(2000)
         console.log(`Adding ${pokemon.name} (${pokemon.number} of ${KANTO_NUM_POKEMON}) to the database`)
-        await database.query(`INSERT INTO pokemon SET ?`, {
+        await database.query("INSERT INTO pokemon SET ?", {
           pokemon_key: pokemon_key,
           pokemon_name: pokemon.name,
-          pokemon_num: pokemon.number
+          pokemon_num: pokemon.number,
+          pokemon_sprite: pokemon.sprite
         })
       }
     }
@@ -95,6 +98,50 @@ class PokemonModel {
     }
     catch (e) {
       console.error(e)
+    }
+  }
+
+  async getDeck(deckId) {
+    const
+      deck = await database.query("SELECT id,name from deck WHERE id = ?", deckId),
+      deckMemmbers = await database.query(`
+        SELECT
+          p.id,
+          p.pokemon_key,
+          p.pokemon_name,
+          p.pokemon_num,
+          p.pokemon_sprite
+        FROM
+          deck AS d
+          INNER JOIN team_member AS tm ON d.id = tm.deck_id
+          INNER JOIN pokemon AS p ON p.id = tm.pokemon_id
+        WHERE
+          d.id = ?
+      `, deckId)
+    
+    return {
+      deckId: deck[0].id,
+      deckName: deck[0].name,
+      deckMembers: deckMemmbers
+    }
+  }
+
+  async addDeck(deckName) {
+    await database.query("INSERT INTO deck SET ?", {
+      name: deckName
+    })
+  }
+
+  async addToDeck(deckId, pokemonNumber) {
+    const deck = await this.getDeck(deckId)
+
+    if (deck.deckMembers.length < DECK_SIZE_LIMIT) {
+      await database.query("INSERT INTO team_member SET ?", {
+        deck_id: deckId,
+        pokemon_id: pokemonNumber
+      })
+    } else {
+      return { error: "Too many members" }
     }
   }
 
