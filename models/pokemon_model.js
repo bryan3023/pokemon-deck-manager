@@ -56,7 +56,7 @@ class PokemonModel {
     const names = await database.query('SELECT pokemon_name FROM pokemon')
     return names.map(n => {
         return {
-          pokemonkey: n.pokemon_name
+          pokemonKey: n.pokemon_name
         }
     })
   }
