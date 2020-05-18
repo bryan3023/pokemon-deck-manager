@@ -10,15 +10,14 @@
     margin: 10%;
 }
 
-.background{
-    text-align: center;
-    background:linear-gradient(to right,red,black,white) ;
-
+.background {
+  text-align: center;
+  background:linear-gradient(to right,red,black,white);
 }
 
-.image{
-    width:200px;
-    height:200px;
+.image {
+  width:200px;
+  height:200px;
 }
 
 .pokemon-name{
