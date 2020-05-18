@@ -35,6 +35,6 @@ function Invoke-MySqlScript {
     if ($DatabaseName) {
         $InvokeMySql.ArgumentList += "--database=$DatabaseName"
     }
-
+    Write-Output $InvokeMySql
     Start-Process @InvokeMySql
 }
