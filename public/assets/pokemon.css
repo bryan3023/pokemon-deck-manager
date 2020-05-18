@@ -1,0 +1,32 @@
+{
+   margin: 0px;
+   padding: 0px;
+}
+
+.pokemon-card-container{
+    background-color:red
+    width:350px;
+    height:450px;
+    margin: 10%;
+}
+
+.background{
+    text-align: center;
+    background:linear-gradient(to right,red,black,white) ;
+
+}
+
+.image{
+    width:200px;
+    height:200px;
+}
+
+.pokemon-name{
+    text-align: center;
+    font-size:19px;
+    font-weight: lighter;
+    padding: 10px;
+
+
+
+}
