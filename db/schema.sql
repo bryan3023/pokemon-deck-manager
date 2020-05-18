@@ -8,14 +8,16 @@
 
 -- Create tables --
 
-CREATE TABLE dummy (
-  id
-    INT
-    NOT NULL
-    AUTO_INCREMENT
-    PRIMARY KEY,
+DROP DATABASE IF EXISTS pokemon_db;
+CREATE DATABASE pokemon_db;
 
-  test
-    VARCHAR(120)
-    NOT NULL
+USE pokemon_db;
+
+CREATE TABLE pokedex (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    pokemon_name VARCHAR(30) NOT NULL
+    pokemon_num INTEGER NOT NULL
+    deck_id INTEGER NOT NULL
+    PRIMARY KEY (id)
 );

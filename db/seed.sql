@@ -4,11 +4,13 @@
 --  Pre-populate the database with values.
 --
 
+USE pokemon_db;
 
--- Populate dummy to test --
+INSERT INTO pokemon (pokemon_name)
+VALUES (#enter here),
+      
+INSERT INTO pokemon (pokemon_number)
+VALUES (#enter here),
 
-INSERT INTO dummy
-  (test)
-VALUES
-  ("hello")
-;
+INSERT INTO pokemon (pokemon_type)
+VALUES (#enter here)
