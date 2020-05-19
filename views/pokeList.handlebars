@@ -1,21 +1,78 @@
-<ul>
-  {{#each pokemon}}
-  	<li>
-		<a class="list-group-item list-group-item-action active" id="list-"+{{pokemonkey}}+"-list" data-toggle="list" href="#list-"+{{pokemonkey}}+"" role="tab" aria-controls=""+{{pokemonkey}}+"">Name: {{pokemonkey}}</a>
-  	</li>
-  {{/each}}
-</ul>
+<div class="row h-100">
 
-<div class="row">
-  <div class="col-4">
-    <div class="list-group" id="list-tab" role="tablist">
-		<a class="list-group-item list-group-item-action active" id="list-"+{{pokemonkey}}+"-list" data-toggle="list" href="#list-"+{{pokemonkey}}+"" role="tab" aria-controls="{{pokemonkey}}">Name: {{pokemonkey}}</a>
+  <div class="col-2 ml-0 mt-3" style="overflow: scroll; height: 500px;">
+    <ul class="ml-0">
+      {{#each pokemon}}
+        <li class="list-group-item list-group-item-action ml-0 pokemon-entry" id="list-{{pokemon_key}}-list" data-value="{{pokemon_key}}" aria-controls="{{pokemon_key}}">{{pokemon_name}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="col mt-3">
+    <div class="pokemon-card-container">
+      <div class="pokemon-card">
+        <div class="sprite-container">
+          <img class="image" id="pokemon-sprite">
+        </div>
+
+        <div class="entry">
+          <h1 class ="pokemon-name"></h1>
+          <p class="pokemon-number"></p>
+        </div>
+        <div class="add-button-container mx-3 pb-3" style="justify-content: center; text-align: center">
+          <button id="add-button" class="btn btn-primary">Add to Deck</button>
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Stats</button>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="col-8">
-    <div class="tab-content" id="nav-tabContent">
-		{{!-- PUT IN DETAILED POKEMON INFO --}}
-      <div class="tab-pane fade" id="list-"+{{pokemonkey}} role="tabpanel" aria-labelledby="list-"+{{pokemonkey}}+"-list">...</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Pokémon Stats</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="hp">2</p>
+        <p class="speed">2</p>
+        <p class="defense">2</p>
+        <p class="specialDefense">2</p>
+        <p class="attack">2</p>
+        <p class="specialAttack">2</p>
+        <p class="types">2</p>
+        <p class="height">2</p>
+        <p class="weight">2</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
+</div>
+
+  <div class="col mt-3">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="w-75"><h2>Deck</h2></div>
+      </div>
+      <div class="row">
+        <div class="col px-0 mr-3">
+          <li class="list-group-item list-group-item-action ml-0 deck-entry w-100" id="list-{{deckId}}-list" data-value="{{deckId}}" aria-controls="{{deckName}}">{{deckName}}</li>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col px-0 mr-3">
+        {{#each deckMembers}}
+          <li class="list-group-item list-group-item-action ml-0 deck-entry w-100" id="list-{{id}}-list" data-value="{{id}}" aria-controls="{{pokemon_name}}">{{pokemon_name}}
+           <button type="button" value="{{id}}" class="close" aria-label="Close">&times;</button></li>
+        {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

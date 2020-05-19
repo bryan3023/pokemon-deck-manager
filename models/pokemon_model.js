@@ -23,8 +23,13 @@ class PokemonModel {
       for (let pokemon_key of kanto) {
 
         const pokemon = await this.getByKey(pokemon_key)
+
+        // Since we can only make 100 calls per minte, slow it down to stay
+        // under the threshhold. This will take about 5 minutes the first
+        // time you run this program.
         await this.sleep(2000)
         console.log(`Adding ${pokemon.name} (${pokemon.number} of ${KANTO_NUM_POKEMON}) to the database`)
+
         await database.query("INSERT INTO pokemon SET ?", {
           pokemon_key: pokemon_key,
           pokemon_name: pokemon.name,
@@ -53,12 +58,7 @@ class PokemonModel {
 
 
   async getAll() {
-    const names = await database.query('SELECT pokemon_name FROM pokemon')
-    return names.map(n => {
-        return {
-          pokemonKey: n.pokemon_name
-        }
-    })
+    return await database.query('SELECT * FROM pokemon')
   }
 
 
@@ -77,8 +77,6 @@ class PokemonModel {
         pokemonAbilities = pokemon.abilities.map(a => a.ability.name),
         pokemonMoves = pokemon.moves.map(m => m.move.name),
         pokemonTypes = pokemon.types.map(t => t.type.name)
-
-//        console.log(await this.pokeAPI.getMovesList(pokemonMoves))
 
       return {
         name: pokemonName,
@@ -105,7 +103,12 @@ class PokemonModel {
   }
 
   async getAllDecks() {
-    return await database.query('SELECT * FROM deck')
+    try {
+      return await database.query('SELECT * FROM deck')
+    }
+    catch (error) {
+      return { error: error.message }
+    }
   }
 
   async getDeck(deckId) {
@@ -113,7 +116,7 @@ class PokemonModel {
       deck = await database.query("SELECT id,name from deck WHERE id = ?", deckId),
       deckMembers = await database.query(`
         SELECT
-          p.id,
+          tm.id,
           p.pokemon_key,
           p.pokemon_name,
           p.pokemon_num,
@@ -134,21 +137,46 @@ class PokemonModel {
   }
 
   async addDeck(deckName) {
-    await database.query("INSERT INTO deck SET ?", {
-      name: deckName
-    })
+    try {
+      await database.query("INSERT INTO deck SET ?", { name: deckName })
+      return {success: true}
+    }
+    catch (error) {
+      return { error: error.message }
+    }
+  }
+
+  async removeDeck(deckId) {
+    await database.query("DELETE FROM deck WHERE id = ?", deckId)
+  }
+
+  async removeFromDeck(deckId, pokemonNumber) {
+    try {
+      await database.query("DELETE FROM team_member WHERE deck_id = ? AND id = ?",
+        [ deckId, pokemonNumber])
+      return { success: true }
+    }
+    catch (error) {
+      return { error: error.message }
+    }
   }
 
   async addToDeck(deckId, pokemonNumber) {
     const deck = await this.getDeck(deckId)
 
-    if (deck.deckMembers.length < DECK_SIZE_LIMIT) {
+    if (deck.deckMembers.length >= DECK_SIZE_LIMIT) {
+      return { error: "Too many members" }
+    }
+
+    try {
       await database.query("INSERT INTO team_member SET ?", {
         deck_id: deckId,
         pokemon_id: pokemonNumber
       })
-    } else {
-      return { error: "Too many members" }
+      return { success: true }
+    }
+    catch (error) {
+      return { error: error.message }
     }
   }
 

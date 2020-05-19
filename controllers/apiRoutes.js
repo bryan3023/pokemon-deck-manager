@@ -38,6 +38,13 @@ module.exports = function(app) {
       .catch((error) => console.error(error))
   })
 
+  app.delete("/api/deck/:deckId", function(req, res) {
+    const deckId = req.params.deckId
+
+    Pokemon.removeDeck(deckId)
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
 
   app.post("/api/deck", function(req, res) {
     const deckName = req.body.name
@@ -53,6 +60,16 @@ module.exports = function(app) {
       pokemonNumber = req.params.pokemonNumber
 
     Pokemon.addToDeck(deckId, pokemonNumber)
+      .then((response) => res.json(response))
+      .catch((error) => console.error(error))
+  })
+
+  app.delete("/api/deck/:deckId/:pokemonNumber", function(req, res) {
+    const
+      deckId = req.params.deckId,
+      pokemonNumber = req.params.pokemonNumber
+
+    Pokemon.removeFromDeck(deckId, pokemonNumber)
       .then((response) => res.json(response))
       .catch((error) => console.error(error))
   })

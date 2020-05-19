@@ -6,11 +6,7 @@
 
 -- USE pokemon_db;
 
--- INSERT INTO pokemon (pokemon_name)
--- VALUES (#enter here),
-      
--- INSERT INTO pokemon (pokemon_number)
--- VALUES (#enter here),
+-- For this first interation, we'll manage only a single deck.
 
--- INSERT INTO pokemon (pokemon_type)
--- VALUES (#enter here)
+INSERT INTO deck (name)
+VALUES ('My Deck');
